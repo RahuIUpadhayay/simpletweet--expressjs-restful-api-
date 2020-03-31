@@ -10,6 +10,11 @@ const postSchema =new Schema({
         type:String,
         required:true
     },
+    creator:{
+        type:Object,
+        required:true
+
+    }
 },
     {timestamps:true}
 );

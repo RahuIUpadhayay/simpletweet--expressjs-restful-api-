@@ -12,6 +12,7 @@ exports.getPosts=(req,res,next)=>{
 
 
 exports.createPost=(req,res,next)=>{
+    
    const errors=validationResult(req);
    if (!errors.isEmpty()){
        const error=new Error('validation failed');
@@ -24,6 +25,10 @@ exports.createPost=(req,res,next)=>{
    const post= new Post({
        title:title,
        content:content,
+       creator:{
+           name:"rahul"
+           
+       }
 
    });
    post.save()

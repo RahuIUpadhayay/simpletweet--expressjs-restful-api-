@@ -6,6 +6,7 @@ const path = require('path');
 const app = express();
 
 const feedRoutes=require('./routes/feed');
+const authRoutes=require('./routes/auth');
 
 app.use(bodyParser.json());
 app.use('/images', express.static(path.join(__dirname,'images')));
@@ -20,16 +21,17 @@ app.use((req,res,next) =>{
 });
 
 app.use('/feed',feedRoutes);
+app.use('/auth',authRoutes);
 
 app.use((error,req,res,next)=>{
-    console.log(error);
-    const messages=error.message||500;
+   const status=error.statusCode||500;
+    const messages=error.message;
     res.status(status).json({message:messages});
     
 
 });
 
-mongoose.connect('MONGODB URL').
+mongoose.connect('connection url').
 then(res=>{
     app.listen(3000);
 }).catch(
